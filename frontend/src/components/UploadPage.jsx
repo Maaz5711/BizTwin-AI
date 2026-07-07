@@ -46,7 +46,7 @@ export default function UploadPage({ onUploaded }) {
             <input
               type="file"
               accept=".csv"
-              onChange={(e) => setFiles((f) => ({ ...f, [key]: e.target.files<a href="" class="citation-link" target="_blank" style="vertical-align: super; font-size: 0.8em; margin-left: 3px;">[0]</a> }))}
+              onChange={(e) => setFiles((f) => ({ ...f, [key]: e.target.files[0]}))}
               className="block w-full text-sm file:mr-3 file:rounded-lg file:border-0
                          file:bg-indigo-50 file:px-4 file:py-2 file:text-sm
                          file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100"
