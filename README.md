@@ -1,500 +1,188 @@
-# BizTwin
-## The AI Business Digital Twin
+# BizTwin — AI Business Digital Twin
 
-> **An Enterprise AI Command Center that creates an intelligent digital twin of your business, enabling executives to simulate decisions, analyze operations, and receive AI-powered recommendations before making real-world changes.**
+![Status](https://img.shields.io/badge/Status-Hackathon-blue)![Python](https://img.shields.io/badge/Python-3.11-green)![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)![React](https://img.shields.io/badge/React-Frontend-blue)![AMD](https://img.shields.io/badge/Powered%20By-AMD-red)
 
-![Status](https://img.shields.io/badge/Status-Hackathon-blue)
-![Python](https://img.shields.io/badge/Python-3.11-green)
-![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
-![React](https://img.shields.io/badge/React-Frontend-blue)
-![AMD](https://img.shields.io/badge/Powered%20By-AMD-red)
+> Ask your business what happens next — before it happens.
 
----
+BizTwin is an AI-powered Business Digital Twin that lets small and medium-sized business owners upload their operational spreadsheets and simulate decisions — supplier changes, hiring, product discontinuation — in plain English, before committing real money to them.
 
-# Overview
-
-Modern businesses generate enormous amounts of operational data, yet many important decisions are still made using spreadsheets, intuition, and manual analysis.
-
-Questions like:
-
-- Should we hire another salesperson?
-- What happens if supplier costs increase?
-- Which products should be discontinued?
-- Why is profit declining?
-- Which department needs immediate attention?
-
-often require analysts, accountants, and hours of manual work.
-
-**BizTwin** solves this by creating a **Digital Twin** of a business and combining it with a collaborative **Multi-Agent AI Executive Team**.
-
-Business owners simply upload their operational data and ask questions in natural language.
-
-BizTwin analyzes the data, simulates future scenarios, calculates financial impact, and provides executive-level recommendations backed by real business numbers.
-
-Built for the **AMD Developer Hackathon 2026 – Unicorn Track**.
+Built for the AMD AI Hackathon.
 
 ---
 
-# Problem
+## Table of Contents
 
-Small and medium-sized businesses often lack access to expensive Business Intelligence platforms and dedicated analysts.
-
-Decision makers struggle to:
-
-- Understand operational performance
-- Forecast business outcomes
-- Detect hidden risks
-- Evaluate strategic decisions
-- Convert raw data into actionable insights
-
----
-
-# Our Solution
-
-BizTwin creates a digital representation of a company using operational data including:
-
-- Sales
-- Products
-- Inventory
-- Suppliers
-- Employees
-- Expenses
-
-The platform then allows users to interact with their business using conversational AI.
-
-Instead of reading spreadsheets...
-
-Ask:
-
-> "What happens if Supplier A increases prices by 15%?"
-
-or
-
-> "Is hiring two additional salespeople profitable?"
-
-BizTwin performs the calculations, runs simulations, and explains the outcome.
+- [Overview](#overview)
+- [Problem](#problem)
+- [Solution](#solution)
+- [How It Works](#how-it-works)
+- [Core Features](#core-features)
+- [Why AI](#why-ai)
+- [Why AMD](#why-amd)
+- [Architecture](#architecture)
+- [Tech Stack](#tech-stack)
+- [Usage](#usage)
+- [Roadmap](#roadmap)
+- [Team](#team)
+- [License](#license)
 
 ---
 
-# Core Features
+## Overview
 
-## Business Twin Creation
+Most small businesses generate real operational data — sales, inventory, supplier costs, employee expenses — but that data sits scattered across spreadsheets and is rarely used for actual decision-making. Business owners typically decide whether to switch suppliers, hire staff, or drop a product based on intuition, because advanced business intelligence tooling is too expensive, too technical, or built for enterprises with dedicated data teams.
 
-Upload CSV or Excel files to automatically create a digital representation of your business.
-
-Supports:
-
-- Sales
-- Inventory
-- Products
-- Suppliers
-- Employees
+BizTwin closes that gap. It turns a business's spreadsheets into a structured digital twin, then lets the owner interact with it conversationally — asking questions like *"What happens if Supplier A increases prices by 15%?"* or *"Should I hire two more sales reps?"* — and get back a data-grounded simulation of the outcome, explained in plain language, with a clear before-and-after comparison.
 
 ---
 
-## AI Business Chat
+## Problem
 
-Interact with your business using natural language.
+Small and medium-sized businesses face:
 
-Example questions:
+- Reduced profitability due to poor supplier decisions
+- Overstocking or understocking inventory
+- Unnecessary hiring costs
+- Difficulty identifying low-performing products
+- Hours spent manually analyzing spreadsheets
+- Limited access to affordable, usable business intelligence tools
 
-- Why did profits decrease?
-- Which products perform best?
-- Which supplier is increasing costs?
-- What should I prioritize next?
-
----
-
-## What-If Scenario Simulation
-
-Current MVP includes:
-
-### Supplier Price Increase
-
-Predict:
-
-- Profit impact
-- Margin changes
-- Affected products
+Current analytics platforms are expensive, require technical expertise, or are designed for large enterprises — leaving most SMBs without a practical way to test decisions before making them.
 
 ---
 
-### Hiring Analysis
+## Solution
 
-Estimate:
-
-- Salary costs
-- Revenue growth
-- ROI
+BizTwin creates an AI-powered digital twin of a business from uploaded spreadsheets. Instead of manually analyzing data, the owner uploads sales, inventory, supplier, and employee information, and BizTwin processes it into a unified business model. The owner can then ask questions in plain English; a simulation engine performs the actual financial calculations on the real uploaded data, while an AI assistant explains the results in accessible language and presents visual comparisons — letting the owner evaluate a decision before spending real money on it.
 
 ---
 
-### Product Discontinuation
+## How It Works
 
-Evaluate:
+1. **Upload Business Data** — sales, products, inventory, suppliers, and employee spreadsheets (CSV/Excel).
+2. **Create Digital Twin** — BizTwin combines all uploaded data into one structured model of the business.
+3. **Ask Questions** — the owner interacts naturally: *"Which supplier affects my profits the most?"*, *"Should I hire two sales employees?"*
+4. **Simulation** — the simulation engine runs the scenario against the real business data.
+5. **AI Explanation** — the AI assistant explains the financial impact, business implications, recommended actions, and supporting visualizations.
 
-- Lost revenue
-- Saved expenses
-- Net profitability
-
----
-
-## Executive Dashboard
-
-Interactive analytics including:
-
-- Revenue
-- Profit
-- Expenses
-- Inventory
-- Supplier insights
-- Before vs After comparisons
-- KPI cards
-- Charts
+The AI never generates financial values itself — all numerical calculations are performed by the simulation engine using the business's actual data. The AI's role is limited to understanding the question, triggering the right simulation, and explaining the result.
 
 ---
 
-## Explainable AI
+## Core Features
 
-Business calculations always come from uploaded data.
-
-The AI never invents numbers.
-
-Every recommendation includes an explanation.
-
----
-
-# AI Multi-Agent Architecture
-
-Instead of relying on a single AI model, BizTwin uses a team of specialized AI agents that collaborate like an executive board.
-
-Each agent focuses on a specific business domain and reports its findings to the Executive Agent.
+- **Business Data Upload** — CSV/Excel ingestion for sales, inventory, suppliers, and employees
+- **Business Digital Twin** — a structured digital representation of the company's operations
+- **AI Business Assistant** — natural language interface to the twin
+- **Interactive Dashboard** — revenue, profit, inventory, employees, supplier info, and KPIs at a glance
+- **Scenario Simulation** — supplier price increases, hiring costs, and product discontinuation
+- **Before vs. After Comparison** — visual comparison of business metrics for every simulated decision
 
 ---
 
-## Executive Agent
+## Why AI
 
-The brain of BizTwin.
+Traditional business intelligence platforms require users to understand dashboards, filters, reports, and SQL. BizTwin removes that barrier by letting users interact in natural language. AI is used to:
 
-Responsibilities:
+- Understand business questions
+- Identify the requested scenario
+- Interpret simulation results
+- Explain complex financial outcomes in simple language
+- Improve accessibility for non-technical users
 
-- Understand user intent
-- Coordinate all agents
-- Combine insights
-- Generate executive summaries
-- Recommend strategic actions
-
----
-
-## Sales Intelligence Agent
-
-Analyzes business growth.
-
-Responsibilities:
-
-- Revenue analysis
-- Sales trends
-- Product performance
-- Customer purchasing insights
+All numbers come from the simulation engine, not the AI — this keeps BizTwin trustworthy for real financial decisions rather than being a purely generative tool.
 
 ---
 
-## Finance Agent
+## Why AMD
 
-Monitors financial health.
-
-Responsibilities:
-
-- Profit calculation
-- Expense analysis
-- Margin optimization
-- Cost anomalies
-
----
-
-## Inventory Agent
-
-Optimizes inventory operations.
-
-Responsibilities:
-
-- Overstock detection
-- Low-stock alerts
-- Dead inventory
-- Restocking suggestions
-
----
-
-## Supplier Intelligence Agent
-
-Analyzes procurement performance.
-
-Responsibilities:
-
-- Supplier comparison
-- Price monitoring
-- Vendor risks
-- Procurement optimization
-
----
-
-## Scenario Simulation Agent
-
-The predictive engine of BizTwin.
-
-Runs business simulations including:
-
-- Supplier price increase
-- Hiring employees
-- Product discontinuation
-
-Calculates:
-
-- Revenue impact
-- Cost impact
-- Profit impact
-- Business risk
-
----
-
-## Risk Analysis Agent
-
-Continuously evaluates business health.
-
-Responsibilities:
-
-- Detect anomalies
-- Identify profit leaks
-- Operational risks
-- Financial impact estimation
-
----
-
-## Analytics Agent
-
-Transforms raw business data into executive insights.
-
-Responsibilities:
-
-- KPI generation
-- Dashboard metrics
-- Trend analysis
-- Business summaries
-
----
-
-# Agent Collaboration
-
-```
-                          User
-                            │
-                            ▼
-                  Executive Agent
-                            │
-     ┌─────────┬─────────┬─────────┬──────────┬──────────┐
-     ▼         ▼         ▼         ▼          ▼
- Sales     Finance   Inventory  Supplier   Risk
- Agent       Agent      Agent      Agent     Agent
-                            │
-                            ▼
-                 Scenario Simulation Agent
-                            │
-                            ▼
-                Executive Recommendation
-```
-
----
-
-# Architecture
-
-```
-                React Frontend
-                       │
-                       ▼
-                 FastAPI Backend
-                       │
-               Business Twin Engine
-                       │
-               AI Orchestrator
-                       │
-     ┌─────────┬──────────┬─────────┐
-     ▼         ▼          ▼
- Business   Simulation  Analytics
-   Data       Engine
-                       │
-                       ▼
-        Fireworks AI + AMD Open Models
-                       │
-                       ▼
-            AMD Developer Cloud GPUs
-```
-
----
-
-# Technology Stack
-
-## Frontend
-
-- React
-- TypeScript
-- Tailwind CSS
-- Recharts
-
-## Backend
-
-- FastAPI
-- Python
-
-## AI
-
-- Fireworks AI
-- LangGraph
-- Open-source LLMs
-- Prompt Engineering
-
-## Data
-
-- Pandas
-- PostgreSQL
-- ChromaDB (Future)
-
-## Infrastructure
+BizTwin demonstrates practical deployment of AI using AMD technologies:
 
 - AMD Developer Cloud
-- Docker
-- Docker Compose
+- AMD GPU infrastructure
+- Fireworks AI for LLM inference during development
+
+This shows that enterprise-grade AI decision support can be deployed efficiently on AMD-powered infrastructure while maintaining strong performance for real business use cases.
 
 ---
 
-# AMD Technologies Used
+## Architecture
 
-BizTwin is built using AMD's AI ecosystem.
+```
+┌─────────────────────┐     ┌──────────────────────┐     ┌────────────────────────┐
+│   Data Upload        │────▶│   Digital Twin        │────▶│   Simulation Engine     │
+│  (CSV / Excel)       │     │  (structured model)   │     │ (deterministic math)    │
+└─────────────────────┘     └──────────────────────┘     └────────────┬───────────┘
+                                                                       │
+                                                                       ▼
+┌─────────────────────┐     ┌──────────────────────┐     ┌────────────────────────┐
+│  Interactive          │◀───│   AI Explanation       │◀───│   Simulation Result     │
+│  Dashboard             │     │   Layer (Claude API)   │     │   (before vs. after)    │
+└─────────────────────┘     └──────────────────────┘     └────────────────────────┘
+```
 
-- AMD Developer Cloud for GPU-powered model execution
-- Fireworks AI for LLM inference
-- Open-source models running on AMD GPUs
-- Docker for containerized deployment
+The AI layer and the simulation engine are deliberately separated: the AI interprets natural language and explains outcomes, while all financial math is computed deterministically from the business's real uploaded data.
 
 ---
 
-# Example Workflow
+## Tech Stack
 
-```
-Upload Business Data
-        │
-        ▼
-Create Business Digital Twin
-        │
-        ▼
-Ask Business Question
-        │
-        ▼
-AI Agents Analyze Business
-        │
-        ▼
-Run Financial Simulation
-        │
-        ▼
-Generate Executive Recommendation
-        │
-        ▼
-Interactive Dashboard
-```
+- **Frontend:** Next.js, Tailwind CSS
+- **Backend:** FastAPI
+- **AI Layer:** Claude API
+- **OCR / Data Extraction:** Tesseract OCR
+- **Database:** Supabase
+- **Hosting:** Vercel (frontend), Railway (backend)
+- **Email/Notifications:** Resend
+- **AI Infrastructure:** AMD Developer Cloud, AMD GPUs, Fireworks AI (LLM inference during development)
 
 ---
 
-# Example Questions
+## Usage
 
-- What happens if supplier prices increase by 15%?
-- Should we hire two more salespeople?
-- Which products are reducing profitability?
-- Predict next month's revenue.
-- Which supplier has the greatest financial impact?
-- Summarize this month's business performance.
+> Installation and Docker setup instructions are provided separately below this section.
 
----
+Once running, the typical usage flow is:
 
-# Project Structure
-
-```
-BizTwin/
-
-├── frontend/
-├── backend/
-├── docker/
-├── docs/
-├── sample-data/
-├── assets/
-├── README.md
-├── docker-compose.yml
-└── LICENSE
-```
+1. Open the BizTwin web app.
+2. Upload your business spreadsheets (sales, inventory, suppliers, employees).
+3. Wait for BizTwin to build your digital twin and populate the dashboard.
+4. Ask a business question in the chat interface, e.g.:
+   - "What happens if Supplier A increases prices by 15%?"
+   - "Should I hire two additional sales representatives?"
+   - "Which products are reducing my profits?"
+5. Review the simulation result: financial impact, explanation, and before/after comparison on the dashboard.
 
 ---
 
-# Getting Started
+## Roadmap
 
-## Clone Repository
+Future versions of BizTwin could include:
 
-```bash
-git clone https://github.com/<your-username>/biztwin-ai.git
-```
-
-## Backend
-
-```bash
-cd backend
-
-pip install -r requirements.txt
-
-uvicorn main:app --reload
-```
-
-## Frontend
-
-```bash
-cd frontend
-
-npm install
-
-npm run dev
-```
-
-## Docker
-
-```bash
-docker compose up --build
-```
-
----
-
-# Future Roadmap
-
-- Predictive demand forecasting
-- AI-generated executive reports
-- Voice-enabled business assistant
-- ERP & accounting software integrations
-- Autonomous AI workflows
-- Multi-company management
+- ERP integration
+- Shopify integration
+- QuickBooks integration
+- Real-time inventory synchronization
+- Sales forecasting
+- Demand prediction using machine learning
+- Supplier recommendation engine
+- Multi-branch business support
+- Financial forecasting
 - Mobile application
-- Real-time business monitoring
+- Multi-user collaboration
+- Automated reporting
 
 ---
 
-# Team
+## Team
 
-Developed by students from **FAST National University** for the **AMD Developer Hackathon 2026**.
-
----
-
-# Why BizTwin?
-
-BizTwin combines the concept of a **Business Digital Twin** with an **AI Executive Team**, allowing organizations to test decisions virtually before committing resources in the real world.
-
-Our vision is to make enterprise-grade business intelligence accessible to every business through collaborative AI.
+- **Huzaifa Khalid**
+- **Hamza Shehryar**
+- **Muhammad Bilal**
+- **Maaz Ahmed**
 
 ---
 
-# License
+## License
 
-MIT License
+This project is licensed under the [MIT License](LICENSE).
