@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense, lazy } from "react";
 import Sidebar from "./components/Sidebar.jsx";
-import Dashboard from "./components/Dashboard.jsx";
-import UploadPage from "./components/UploadPage.jsx";
-import SimulationPage from "./components/SimulationPage.jsx";
-import ChatPanel from "./components/ChatPanel.jsx";
 import { getHealth } from "./api.js";
+import ErrorBoundary from "./ErrorBoundary.jsx";
+
+const Dashboard = lazy(() => import("./components/Dashboard.jsx"));
+const UploadPage = lazy(() => import("./components/UploadPage.jsx"));
+const SimulationPage = lazy(() => import("./components/SimulationPage.jsx"));
+const ChatPanel = lazy(() => import("./components/ChatPanel.jsx"));
 
 export default function App() {
   const [page, setPage] = useState("dashboard");
@@ -45,12 +47,16 @@ export default function App() {
         </header>
 
         <main className="flex-1 overflow-y-auto p-6">
-          {page === "dashboard" && <Dashboard dataVersion={dataVersion} />}
-          {page === "upload" && (
-            <UploadPage onUploaded={() => setDataVersion((v) => v + 1)} />
-          )}
-          {page === "simulate" && <SimulationPage />}
-          {page === "chat" && <ChatPanel />}
+          <ErrorBoundary>
+            <Suspense fallback={<div className="p-4">Loading…</div>}>
+              {page === "dashboard" && <Dashboard dataVersion={dataVersion} />}
+              {page === "upload" && (
+                <UploadPage onUploaded={() => setDataVersion((v) => v + 1)} />
+              )}
+              {page === "simulate" && <SimulationPage />}
+              {page === "chat" && <ChatPanel />}
+            </Suspense>
+          </ErrorBoundary>
         </main>
       </div>
     </div>
