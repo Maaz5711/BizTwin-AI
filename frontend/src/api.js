@@ -1,5 +1,5 @@
 // Single place for all backend calls — matches docs/API_CONTRACT.md
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 async function handle(res) {
   if (!res.ok) {
