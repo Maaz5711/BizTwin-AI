@@ -20,6 +20,10 @@ SYSTEM_PROMPT = (
 
 def answer_question(question: str, analytics: dict) -> str:
     api_key = os.getenv("FIREWORKS_API_KEY")
+
+    print("Fireworks key exists:", bool(api_key))
+    print("Model:", os.getenv("FIREWORKS_MODEL"))
+
     if not api_key:
         return _fallback_answer(analytics)
 
