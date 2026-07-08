@@ -54,8 +54,11 @@ def answer_question(question: str, analytics: dict) -> str:
         )
         resp.raise_for_status()
         return resp.json()["choices"][0]["message"]["content"].strip()
-    except requests.RequestException:
-        return _fallback_answer(analytics)
+    except requests.RequestException as e:
+      print("Fireworks error:", e)
+    if 'resp' in locals():
+        print("Response:", resp.text)
+    return _fallback_answer(analytics)
 
 
 def _fallback_answer(a: dict) -> str:
