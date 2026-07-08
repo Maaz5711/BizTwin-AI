@@ -56,6 +56,15 @@ twin = BusinessTwin()
 twin.load_sample_data()
 
 
+@app.get("/", summary="Root endpoint")
+def read_root() -> dict:
+    return {
+        "message": "BizTwin AI Backend is running!",
+        "health_check": "/health",
+        "docs": "/docs"
+    }
+
+
 # ═══════════════════════════════════════════════════════════════
 # ENDPOINT 1 — Health check
 # GET /health
@@ -146,7 +155,7 @@ def analytics() -> dict:
     If Maaz's module is not yet ready, a safe fallback is used
     so the frontend always gets a valid response shape.
     """
-    if not twin.is_ready():
+    if not twin.is_ready:
         raise HTTPException(
             status_code=503,
             detail="No data loaded yet. Please upload CSV files first.",
@@ -156,9 +165,9 @@ def analytics() -> dict:
     # When Maaz's file exists, we use it.
     # Until then, the fallback below keeps everything working.
     try:
-        from analytics import compute_kpis  # Maaz's module
+        from analytics import compute_analytics  # Maaz's module
 
-        return compute_kpis(twin)
+        return compute_analytics(twin)
 
     except ImportError:
         # ── Fallback KPI calculation (Bilal's safe default) ───
@@ -232,7 +241,7 @@ def simulate(body: SimulateRequest) -> dict:
     This endpoint is owned by Maaz (simulation module).
     Bilal wires the route here.
     """
-    if not twin.is_ready():
+    if not twin.is_ready:
         raise HTTPException(
             status_code=503,
             detail="No data loaded yet. Please upload CSV files first.",
@@ -274,7 +283,7 @@ async def chat(body: ChatRequest) -> dict:
     Bilal wires the route here and passes the twin's current KPIs
     so Hamza's module always has fresh numbers to work with.
     """
-    if not twin.is_ready():
+    if not twin.is_ready:
         raise HTTPException(
             status_code=503,
             detail="No data loaded yet. Please upload CSV files first.",
@@ -284,12 +293,15 @@ async def chat(body: ChatRequest) -> dict:
         raise HTTPException(status_code=400, detail="Question cannot be empty.")
 
     # Build current KPI context to pass to Hamza's module
-    kpi_context = _fallback_kpis(twin)
+    try:
+        from analytics import compute_analytics
+        kpi_context = compute_analytics(twin)
+    except ImportError:
+        kpi_context = _fallback_kpis(twin)
 
     try:
         from ai_chat import answer_question  # Hamza's module
-
-        response = await answer_question(body.question, kpi_context)
+        response = answer_question(body.question, kpi_context)
         return {"answer": response}
 
     except ImportError:

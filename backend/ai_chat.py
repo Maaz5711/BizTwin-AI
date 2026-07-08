@@ -49,7 +49,7 @@ def answer_question(question: str, analytics: dict) -> str:
             timeout=30,
         )
         resp.raise_for_status()
-        return resp.json()["choices"]<a href="" class="citation-link" target="_blank" style="vertical-align: super; font-size: 0.8em; margin-left: 3px;">[0]</a>["message"]["content"].strip()
+        return resp.json()["choices"][0]["message"]["content"].strip()
     except requests.RequestException:
         return _fallback_answer(analytics)
 

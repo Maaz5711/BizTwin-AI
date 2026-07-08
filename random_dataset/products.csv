@@ -1,0 +1,11 @@
+product_id,product_name,cost_price,sale_price
+P001,Gaming Mouse,15.0,39.99
+P002,Mechanical Keyboard,35.0,89.99
+P003,UltraWide Monitor,150.0,349.99
+P004,Ergonomic Chair,80.0,199.99
+P005,Noise Cancelling Headphones,45.0,129.99
+P006,Smart Desk Lamp,12.0,29.99
+P007,USB-C Docking Station,25.0,69.99
+P008,HD Webcam,20.0,49.99
+P009,Bluetooth Speaker,18.0,39.99
+P010,Wireless Charger,6.0,19.99

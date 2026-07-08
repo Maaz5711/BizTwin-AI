@@ -40,6 +40,22 @@ class BusinessTwin:
         self.data[name] = self._clean(name, df)
         return len(self.data[name])
 
+    def load_from_bytes(
+        self,
+        sales_bytes: bytes | None = None,
+        products_bytes: bytes | None = None,
+        expenses_bytes: bytes | None = None,
+    ) -> dict[str, int]:
+        summary = {}
+        if sales_bytes:
+            summary["sales.csv"] = self.load_csv_bytes("sales", sales_bytes)
+        if products_bytes:
+            summary["products.csv"] = self.load_csv_bytes("products", products_bytes)
+        if expenses_bytes:
+            summary["expenses.csv"] = self.load_csv_bytes("expenses", expenses_bytes)
+        return summary
+
+
     @staticmethod
     def _clean(name: str, df: pd.DataFrame) -> pd.DataFrame:
         df = df.dropna(subset=REQUIRED_COLUMNS[name]).copy()
