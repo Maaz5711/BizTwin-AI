@@ -44,7 +44,7 @@ app.add_middleware(
     "http://127.0.0.1:5174",
     "http://127.0.0.1:3000",
     # Vercel frontend
-    "https://YOUR-VERCEL-URL.vercel.app",
+    "https://biz-twin-phrjefcza-maaz5711s-projects.vercel.app",
 ],
     allow_credentials=True,
     allow_methods=["*"],
