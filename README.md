@@ -10,6 +10,8 @@ Built for the AMD AI Hackathon.
 
 **Live Demo:** [https://biz-twin-ai.vercel.app](https://biz-twin-ai.vercel.app)
 
+> **Note:** During the AMD Developer Hackathon, BizTwin initially used Fireworks AI for LLM inference on AMD Developer Cloud. After the temporary hackathon API credits expired, the AI layer was migrated to Google's Gemini API for continued development and deployment. The underlying business simulation engine remains unchanged, and all financial calculations continue to be performed deterministically using the uploaded business data.
+
 ---
 
 ## Table of Contents
@@ -94,17 +96,19 @@ Traditional business intelligence platforms require users to understand dashboar
 
 All numbers come from the simulation engine, not the AI — this keeps BizTwin trustworthy for real financial decisions rather than being a purely generative tool.
 
+The production deployment currently uses Google's Gemini API for natural language understanding and business explanations, while the original hackathon prototype used Fireworks AI during development on AMD Developer Cloud.
+
+
 ---
+
 
 ## Why AMD
 
-BizTwin demonstrates practical deployment of AI using AMD technologies:
+BizTwin was originally developed during the AMD Developer Hackathon using AMD Developer Cloud and Fireworks AI for rapid LLM prototyping and testing.
 
-- AMD Developer Cloud
-- AMD GPU infrastructure
-- Fireworks AI for LLM inference during development
+Following the hackathon, the conversational AI layer was migrated to Google's Gemini API for the live deployment after the temporary Fireworks API credits expired. This demonstrates BizTwin's model-agnostic architecture, allowing different large language models to power the conversational interface while the deterministic business simulation engine continues to perform all financial calculations using real uploaded business data.
 
-This shows that enterprise-grade AI decision support can be deployed efficiently on AMD-powered infrastructure while maintaining strong performance for real business use cases.
+The project demonstrates how AI-powered business decision support can be built on AMD technologies while remaining flexible enough to switch LLM providers without changing the underlying business logic.
 
 ---
 
@@ -118,8 +122,8 @@ This shows that enterprise-grade AI decision support can be deployed efficiently
                                                                        │
                                                                        ▼
 ┌─────────────────────┐     ┌──────────────────────┐     ┌────────────────────────┐
-│  Interactive          │◀───│   AI Explanation       │◀───│   Simulation Result     │
-│  Dashboard             │     │   Layer (Claude API)   │     │   (before vs. after)    │
+│ │   Interactive         │◀───│   AI Explanation      │◀───│   Simulation Result     │
+│   Dashboard           │     │ (Google Gemini API)  │     │   (before vs. after)    │
 └─────────────────────┘     └──────────────────────┘     └────────────────────────┘
 ```
 
@@ -129,14 +133,12 @@ The AI layer and the simulation engine are deliberately separated: the AI interp
 
 ## Tech Stack
 
-- **Frontend:** Next.js, Tailwind CSS
+- **Frontend:** React, Vite, Tailwind CSS
 - **Backend:** FastAPI
-- **AI Layer:** Claude API
-- **OCR / Data Extraction:** Tesseract OCR
-- **Database:** Supabase
-- **Hosting:** Vercel (frontend), Railway (backend)
-- **Email/Notifications:** Resend
-- **AI Infrastructure:** AMD Developer Cloud, AMD GPUs, Fireworks AI (LLM inference during development)
+- **AI Layer:** Google Gemini API (Gemini 3.5 Flash)
+- **Data Processing:** Pandas, NumPy
+- **Hosting:** Vercel (Frontend), Render (Backend API)
+- **AI Infrastructure:** AMD Developer Cloud (Hackathon Development), Fireworks AI (Initial LLM Prototyping), Google Gemini API (Production Deployment)
 
 ---
 
