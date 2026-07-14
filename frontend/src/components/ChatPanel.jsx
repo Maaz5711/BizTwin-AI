@@ -36,12 +36,12 @@ export default function ChatPanel() {
   };
 
   return (
-    <div className="mx-auto flex h-full max-w-2xl flex-col">
-      <div className="flex-1 space-y-3 overflow-y-auto rounded-xl bg-white p-4 shadow-sm">
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-2xl flex-col">
+      <div className="flex-1 space-y-3 overflow-y-auto rounded-xl bg-white p-4 shadow-sm sm:p-5">
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
             <div
-              className={`max-w-[80%] whitespace-pre-wrap rounded-2xl px-4 py-2 text-sm ${
+              className={`max-w-[90%] whitespace-pre-wrap rounded-2xl px-4 py-2 text-sm sm:max-w-[80%] ${
                 m.role === "user"
                   ? "bg-indigo-600 text-white"
                   : "bg-slate-100 text-slate-800"
@@ -55,12 +55,12 @@ export default function ChatPanel() {
         <div ref={bottomRef} />
       </div>
 
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
         {SUGGESTIONS.map((s) => (
           <button
             key={s}
             onClick={() => send(s)}
-            className="rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1
+            className="w-full rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1
                        text-xs text-indigo-700 transition hover:bg-indigo-100"
           >
             {s}
@@ -70,13 +70,13 @@ export default function ChatPanel() {
 
       <form
         onSubmit={(e) => { e.preventDefault(); send(); }}
-        className="mt-3 flex gap-2"
+        className="mt-3 flex flex-col gap-2 sm:flex-row"
       >
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about your business…"
-          className="flex-1 rounded-lg border border-slate-300 px-4 py-2 text-sm
+          className="min-w-0 flex-1 rounded-lg border border-slate-300 px-4 py-2 text-sm
                      focus:border-indigo-500 focus:outline-none"
         />
         <button

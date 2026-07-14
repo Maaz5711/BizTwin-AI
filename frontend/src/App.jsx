@@ -19,12 +19,12 @@ export default function App() {
   }, []);
 
   return (
-    <div className="flex h-screen bg-slate-100 text-slate-800">
+    <div className="flex min-h-screen flex-col bg-slate-100 text-slate-800 md:flex-row">
       <Sidebar page={page} onNavigate={setPage} />
 
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <header className="flex items-center justify-between border-b bg-white px-6 py-4">
-          <h1 className="text-xl font-bold">
+      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
+        <header className="flex flex-col gap-3 border-b bg-white px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <h1 className="text-lg font-bold sm:text-xl">
             BizTwin <span className="text-indigo-600">AI</span>
           </h1>
           <span
@@ -44,7 +44,7 @@ export default function App() {
           </span>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6">
           {page === "dashboard" && <Dashboard dataVersion={dataVersion} />}
           {page === "upload" && (
             <UploadPage onUploaded={() => setDataVersion((v) => v + 1)} />

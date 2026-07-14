@@ -31,7 +31,7 @@ export default function Dashboard({ dataVersion }) {
   return (
     <div className="space-y-6">
       {/* KPI cards */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <KpiCard label="Revenue" value={money(data.revenue)} accent="text-indigo-600" />
         <KpiCard
           label="Profit"
@@ -44,9 +44,9 @@ export default function Dashboard({ dataVersion }) {
 
       {/* Charts */}
       <div className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-xl bg-white p-5 shadow-sm">
+        <div className="rounded-xl bg-white p-4 shadow-sm sm:p-5">
           <h2 className="mb-4 font-semibold">Revenue by Month</h2>
-          <ResponsiveContainer width="100%" height={260}>
+          <ResponsiveContainer width="100%" height={220}>
             <LineChart data={data.revenue_by_month}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" fontSize={12} />
@@ -57,9 +57,9 @@ export default function Dashboard({ dataVersion }) {
           </ResponsiveContainer>
         </div>
 
-        <div className="rounded-xl bg-white p-5 shadow-sm">
+        <div className="rounded-xl bg-white p-4 shadow-sm sm:p-5">
           <h2 className="mb-4 font-semibold">Top 5 Products by Revenue</h2>
-          <ResponsiveContainer width="100%" height={260}>
+          <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.top_products}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="product_name" fontSize={11} interval={0} angle={-15} dy={8} />

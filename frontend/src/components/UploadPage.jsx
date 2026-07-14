@@ -30,15 +30,15 @@ export default function UploadPage({ onUploaded }) {
   };
 
   return (
-    <div className="mx-auto max-w-xl space-y-6">
+    <div className="mx-auto w-full max-w-xl space-y-6">
       <div>
-        <h2 className="text-lg font-bold">Upload Your Business Data</h2>
+        <h2 className="text-lg font-bold sm:text-xl">Upload Your Business Data</h2>
         <p className="text-sm text-slate-500">
           Upload one or more CSV files. Sample data is pre-loaded, so this is optional for the demo.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4 rounded-xl bg-white p-6 shadow-sm">
+      <form onSubmit={handleSubmit} className="space-y-4 rounded-xl bg-white p-4 shadow-sm sm:p-6">
         {FILE_FIELDS.map(({ key, label, hint }) => (
           <div key={key}>
             <label className="block text-sm font-medium">{label}</label>
