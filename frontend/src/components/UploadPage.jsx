@@ -30,17 +30,18 @@ export default function UploadPage({ onUploaded }) {
   };
 
   return (
-    <div className="mx-auto max-w-xl space-y-6">
+    <div className="w-full min-w-0 space-y-6">
       <div>
-        <h2 className="text-lg font-bold">Upload Your Business Data</h2>
-        <p className="text-sm text-slate-500">
+        <h2 className="text-lg font-bold sm:text-xl">Upload Your Business Data</h2>
+        <p className="max-w-2xl text-sm text-slate-500">
           Upload one or more CSV files. Sample data is pre-loaded, so this is optional for the demo.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4 rounded-xl bg-white p-6 shadow-sm">
-        {FILE_FIELDS.map(({ key, label, hint }) => (
-          <div key={key}>
+      <form onSubmit={handleSubmit} className="grid gap-4 rounded-2xl bg-white p-4 shadow-sm sm:p-6">
+        <div className="grid gap-4 xl:grid-cols-3">
+          {FILE_FIELDS.map(({ key, label, hint }) => (
+          <div key={key} className="min-w-0">
             <label className="block text-sm font-medium">{label}</label>
             <p className="mb-1 text-xs text-slate-400">Columns: {hint}</p>
             <input
@@ -52,12 +53,13 @@ export default function UploadPage({ onUploaded }) {
                          file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100"
             />
           </div>
-        ))}
+          ))}
+        </div>
 
         <button
           type="submit"
           disabled={busy}
-          className="w-full rounded-lg bg-indigo-600 py-2 font-semibold text-white
+          className="w-full rounded-lg bg-indigo-600 py-2.5 font-semibold text-white
                      transition hover:bg-indigo-700 disabled:opacity-50"
         >
           {busy ? "Uploading…" : "Upload"}

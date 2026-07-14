@@ -10,9 +10,11 @@ const money = (n) =>
 
 function KpiCard({ label, value, accent }) {
   return (
-    <div className="rounded-xl bg-white p-5 shadow-sm">
-      <p className="text-sm text-slate-500">{label}</p>
-      <p className={`mt-1 text-2xl font-bold ${accent}`}>{value}</p>
+    <div className="min-w-0 rounded-2xl bg-white p-4 shadow-sm sm:p-5">
+      <p className="text-xs font-medium uppercase tracking-wide text-slate-500 sm:text-sm">
+        {label}
+      </p>
+      <p className={`mt-1 text-xl font-bold sm:text-2xl ${accent}`}>{value}</p>
     </div>
   );
 }
@@ -29,7 +31,7 @@ export default function Dashboard({ dataVersion }) {
   if (!data) return <p className="text-slate-500">Loading analytics…</p>;
 
   return (
-    <div className="space-y-6">
+    <div className="min-w-0 space-y-6">
       {/* KPI cards */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <KpiCard label="Revenue" value={money(data.revenue)} accent="text-indigo-600" />
@@ -44,30 +46,34 @@ export default function Dashboard({ dataVersion }) {
 
       {/* Charts */}
       <div className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-xl bg-white p-5 shadow-sm">
-          <h2 className="mb-4 font-semibold">Revenue by Month</h2>
-          <ResponsiveContainer width="100%" height={260}>
-            <LineChart data={data.revenue_by_month}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" fontSize={12} />
-              <YAxis fontSize={12} />
-              <Tooltip formatter={(v) => money(v)} />
-              <Line type="monotone" dataKey="revenue" stroke="#4f46e5" strokeWidth={2} />
-            </LineChart>
-          </ResponsiveContainer>
+        <div className="min-w-0 rounded-2xl bg-white p-4 shadow-sm sm:p-5">
+          <h2 className="mb-4 text-sm font-semibold sm:text-base">Revenue by Month</h2>
+          <div className="h-64 w-full sm:h-72 lg:h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={data.revenue_by_month}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" fontSize={12} />
+                <YAxis fontSize={12} />
+                <Tooltip formatter={(v) => money(v)} />
+                <Line type="monotone" dataKey="revenue" stroke="#4f46e5" strokeWidth={2} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
         </div>
 
-        <div className="rounded-xl bg-white p-5 shadow-sm">
-          <h2 className="mb-4 font-semibold">Top 5 Products by Revenue</h2>
-          <ResponsiveContainer width="100%" height={260}>
-            <BarChart data={data.top_products}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="product_name" fontSize={11} interval={0} angle={-15} dy={8} />
-              <YAxis fontSize={12} />
-              <Tooltip formatter={(v) => money(v)} />
-              <Bar dataKey="total_revenue" fill="#4f46e5" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+        <div className="min-w-0 rounded-2xl bg-white p-4 shadow-sm sm:p-5">
+          <h2 className="mb-4 text-sm font-semibold sm:text-base">Top 5 Products by Revenue</h2>
+          <div className="h-64 w-full sm:h-72 lg:h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={data.top_products}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="product_name" fontSize={11} interval={0} angle={-15} dy={8} />
+                <YAxis fontSize={12} />
+                <Tooltip formatter={(v) => money(v)} />
+                <Bar dataKey="total_revenue" fill="#4f46e5" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       </div>
     </div>

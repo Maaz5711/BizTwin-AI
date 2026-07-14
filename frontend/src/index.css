@@ -1,1 +1,51 @@
 @import "tailwindcss";
+
+html,
+body,
+#root {
+	width: 100%;
+	min-height: 100%;
+	overflow-x: hidden;
+}
+
+body {
+	margin: 0;
+}
+
+.app-shell {
+	width: 100%;
+	overflow-x: hidden;
+}
+
+.app-sidebar-desktop {
+	width: 220px;
+}
+
+@media (max-width: 1024px) {
+	.app-sidebar-desktop {
+		width: 220px;
+	}
+}
+
+@media (max-width: 768px) {
+	.app-sidebar-desktop {
+		width: 100%;
+	}
+
+	.app-shell main {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.app-shell header {
+		padding-left: 0.75rem;
+		padding-right: 0.75rem;
+	}
+
+	.app-shell main {
+		padding-left: 0.75rem;
+		padding-right: 0.75rem;
+	}
+}

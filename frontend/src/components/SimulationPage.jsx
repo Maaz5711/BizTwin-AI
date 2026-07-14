@@ -32,15 +32,15 @@ export default function SimulationPage() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
+    <div className="w-full min-w-0 space-y-6">
       <div>
-        <h2 className="text-lg font-bold">What-If Simulator</h2>
-        <p className="text-sm text-slate-500">
+        <h2 className="text-lg font-bold sm:text-xl">What-If Simulator</h2>
+        <p className="max-w-2xl text-sm text-slate-500">
           Pure math on your real data — every number is explainable.
         </p>
       </div>
 
-      <div className="space-y-4 rounded-xl bg-white p-6 shadow-sm">
+      <div className="space-y-4 rounded-2xl bg-white p-4 shadow-sm sm:p-6">
         <div>
           <label className="block text-sm font-medium">Scenario</label>
           <select
@@ -63,7 +63,7 @@ export default function SimulationPage() {
             />
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label className="block text-sm font-medium">Monthly salary</label>
               <input
@@ -96,31 +96,33 @@ export default function SimulationPage() {
       {error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}
 
       {result && (
-        <div className="space-y-4 rounded-xl bg-white p-6 shadow-sm">
+        <div className="space-y-4 rounded-2xl bg-white p-4 shadow-sm sm:p-6">
           <h3 className="font-semibold">Results</h3>
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b text-left text-slate-500">
-                <th className="py-2">KPI</th>
-                <th>Before</th>
-                <th>After</th>
-                <th>Change</th>
-              </tr>
-            </thead>
-            <tbody>
-              {KPI_ROWS.map((k) => (
-                <tr key={k} className="border-b last:border-0">
-                  <td className="py-2 font-medium capitalize">{k}</td>
-                  <td>{k === "margin" ? `${result.before[k]}%` : money(result.before[k])}</td>
-                  <td>{k === "margin" ? `${result.after[k]}%` : money(result.after[k])}</td>
-                  <td className={result.delta[k] >= 0 ? "text-green-600" : "text-red-600"}>
-                    {result.delta[k] >= 0 ? "+" : ""}
-                    {k === "margin" ? `${result.delta[k]}%` : money(result.delta[k])}
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-full text-sm">
+              <thead>
+                <tr className="border-b text-left text-slate-500">
+                  <th className="whitespace-nowrap py-2 pr-4">KPI</th>
+                  <th className="whitespace-nowrap pr-4">Before</th>
+                  <th className="whitespace-nowrap pr-4">After</th>
+                  <th className="whitespace-nowrap">Change</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {KPI_ROWS.map((k) => (
+                  <tr key={k} className="border-b last:border-0">
+                    <td className="whitespace-nowrap py-2 pr-4 font-medium capitalize">{k}</td>
+                    <td className="whitespace-nowrap pr-4">{k === "margin" ? `${result.before[k]}%` : money(result.before[k])}</td>
+                    <td className="whitespace-nowrap pr-4">{k === "margin" ? `${result.after[k]}%` : money(result.after[k])}</td>
+                    <td className={`whitespace-nowrap ${result.delta[k] >= 0 ? "text-green-600" : "text-red-600"}`}>
+                      {result.delta[k] >= 0 ? "+" : ""}
+                      {k === "margin" ? `${result.delta[k]}%` : money(result.delta[k])}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <p className="rounded-lg bg-indigo-50 p-4 text-sm text-indigo-900">
             <span className="font-semibold">Explanation: </span>
             {result.explanation}
