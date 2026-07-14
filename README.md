@@ -8,6 +8,8 @@ BizTwin is an AI-powered Business Digital Twin that lets small and medium-sized 
 
 Built for the AMD AI Hackathon.
 
+**Live Demo:** [https://biz-twin-ai.vercel.app](https://biz-twin-ai.vercel.app)
+
 ---
 
 ## Table of Contents
