@@ -2,7 +2,7 @@
 
 ![Status](https://img.shields.io/badge/Status-Hackathon-blue)![Python](https://img.shields.io/badge/Python-3.11-green)![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)![React](https://img.shields.io/badge/React-Frontend-blue)![AMD](https://img.shields.io/badge/Powered%20By-AMD-red)
 
-> Ask your business what happens next — before it happens.
+> Ask your business what happens next - before it happens.
 
 BizTwin is an AI-powered Business Digital Twin that lets small and medium-sized business owners upload their operational spreadsheets and simulate decisions — supplier changes, hiring, product discontinuation — in plain English, before committing real money to them.
 
