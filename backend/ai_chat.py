@@ -1,70 +1,94 @@
-"""AI Business Chat via Fireworks AI. Falls back gracefully with no API key."""
 import json
 import os
+import time
 
-import requests
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
+from google import genai
 
-load_dotenv()
 
-FIREWORKS_URL = "https://api.fireworks.ai/inference/v1/chat/completions"
+# -----------------------------
+# Load .env
+# -----------------------------
+dotenv_path = find_dotenv()
+print("Dotenv path:", dotenv_path)
+
+load_dotenv(dotenv_path, override=True)
+
+api_key = os.getenv("GEMINI_API_KEY")
+
+if not api_key:
+    raise ValueError("GEMINI_API_KEY is missing from .env")
+
+print("Gemini API key loaded successfully.")
+
+
+# -----------------------------
+# Configure Gemini
+# -----------------------------
+client = genai.Client(api_key=api_key)
+
 
 SYSTEM_PROMPT = (
     "You are BizTwin, a friendly business analyst for a small business owner. "
     "You are given the business's real, computed numbers as JSON. "
-    "Answer the question using ONLY those numbers. Never invent or estimate "
-    "figures that are not in the data. Keep answers short (2-4 sentences), "
-    "plain-English, and always cite the specific numbers you used."
+    "Answer the question using ONLY those numbers. "
+    "Never invent numbers or make assumptions. "
+    "Keep answers concise but useful. Explain what the numbers mean for the business and provide one practical insight or suggestion when relevant."
 )
 
 
 def answer_question(question: str, analytics: dict) -> str:
-    api_key = os.getenv("FIREWORKS_API_KEY")
 
-    print("Fireworks key exists:", bool(api_key))
-    print("Model:", os.getenv("FIREWORKS_MODEL"))
+    prompt = f"""
+{SYSTEM_PROMPT}
 
-    if not api_key:
-        return _fallback_answer(analytics)
+Business Data:
+{json.dumps(analytics, indent=2)}
 
-    payload = {
-        "model": os.getenv(
-            "FIREWORKS_MODEL",
-            "accounts/fireworks/models/llama-v3p1-8b-instruct",
-        ),
-        "max_tokens": 400,
-        "temperature": 0.2,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {
-                "role": "user",
-                "content": (
-                    f"Business data (JSON):\n{json.dumps(analytics)}\n\n"
-                    f"Question: {question}"
-                ),
-            },
-        ],
-    }
-    try:
-        resp = requests.post(
-            FIREWORKS_URL,
-            headers={"Authorization": f"Bearer {api_key}"},
-            json=payload,
-            timeout=30,
-        )
-        resp.raise_for_status()
-        return resp.json()["choices"][0]["message"]["content"].strip()
-    except requests.RequestException as e:
-      print("Fireworks error:", e)
-    if 'resp' in locals():
-        print("Response:", resp.text)
+Question:
+{question}
+"""
+
+    print("Calling Gemini...")
+
+    for attempt in range(3):
+
+        try:
+            response = client.models.generate_content(
+                model="gemini-3.1-flash-lite",
+                contents=prompt
+            )
+
+            if response.text:
+                print("Gemini responded successfully.")
+
+                return response.text.strip()
+
+            print("Gemini returned empty response.")
+
+        except Exception as e:
+
+            error = str(e)
+
+            print(f"Gemini attempt {attempt + 1} failed:")
+            print(error)
+
+            # Retry temporary server overload errors
+            if "503" in error and attempt < 2:
+                print("Gemini busy. Retrying in 3 seconds...")
+                time.sleep(3)
+                continue
+
+            break
+
+    print("Using fallback response.")
     return _fallback_answer(analytics)
 
 
 def _fallback_answer(a: dict) -> str:
-    """Deterministic answer from real data — used if the AI is unreachable."""
     return (
-        f"(Offline summary) Revenue is {a['revenue']:.2f}, cost of goods "
-        f"{a['cogs']:.2f}, expenses {a['expenses']:.2f}, giving a profit of "
-        f"{a['profit']:.2f} ({a['margin']:.1f}% margin)."
+        f"(Offline summary) Revenue is {a['revenue']:.2f}, "
+        f"expenses are {a['expenses']:.2f}, "
+        f"profit is {a['profit']:.2f}, "
+        f"margin is {a['margin']:.1f}%."
     )
